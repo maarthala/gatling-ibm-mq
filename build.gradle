@@ -36,7 +36,7 @@ plugins {
 
 gatling {
   // WARNING: options below only work when logback config file isn't provided
-  logLevel = 'WARN' // logback root level
+  logLevel = 'INFO' // logback root level
   logHttp = 'NONE' // set to 'ALL' for all HTTP traffic in TRACE, 'FAILURES' for failed HTTP traffic in DEBUG
 }
 

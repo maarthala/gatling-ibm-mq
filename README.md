@@ -1,5 +1,5 @@
 # About this project
-This project allows to send message to IBM MQ as part of load test using JMS and JNDI connections.
+This project allows to send message to IBM MQ as part of load test using JMS and JNDI connections. Example configuration in this project send message to IBM MQ running in dockers.
 
 # Features
 > Allows to configure multi queue
@@ -57,10 +57,14 @@ Navigate to Manage -> Local Queue Manager -> QM1 -> DEV.QUEUE.1
 
 Currenlty following placeholders are supported. Always check for the latest code for more placeholders. Templating can be extended using [utils](./src/gatling/scala/mq/utils/Utils.scala#L20)
 
-- [X] _UUID_ -> To get UUID in the format XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-- [X] _RANDSTR6_ -> Random string of 6 characters.
-- [X] _RANDSTR8_ -> Random string of 8 characters.
-- [ ] _CURRENT_DT_ISO_ -> Current Date time in ISO format
-- [ ] _CURRENT_TS_ -> Current unix timestamp
-- [ ] _RAND_INT_ -> Rand Interger in the range
-- [ ] _RUNID_ -> unix timestamp only once
+- [X] _UUID_ -> To get UUID  Example: 9802139069434EE2B1B36266FD1BCF59
+- [X] _RAND_STR6_ -> Random string of 6 characters. Example :eredce
+- [X] _RAND_STR8_ -> Random string of 8 characters. Example :eredceww
+- [X] _CURRENT_DT_ISO_ -> Current Date time in ISO format  Example: 2021-12-24T22:26:54
+- [X] _CURRENT_TS_ -> Current unix timestamp  Example : 1640378409
+- [X] _RAND_INT4_ -> Rand Interger in the range  Example: 3492
+- [X] _RAND_INT6_ -> Rand Interger in the range  Example: 209223
+- [X] _RAND_INT8_ -> Rand Interger in the range  Example: 20922322
+- [X] _RUNID_ -> unix timestamp. Once Only per test.   Example : 1640378409
+- [X] _DATE_ -> Only today date in YYYY-MM-DD.   Example : 2021-12-24
+- [X] _TIME_ -> Only current time in HH:MM:SS.   Example : 12:12:12

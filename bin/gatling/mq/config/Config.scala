@@ -4,6 +4,8 @@ import com.typesafe.scalalogging.StrictLogging
 
 object Config extends StrictLogging {
 
+    val rundiLocal = (System.currentTimeMillis() / 1000L).toString();
+
     val ENV_DEV: String = "dev"
     val ENV_PERF: String = "perf"
 
@@ -14,5 +16,7 @@ object Config extends StrictLogging {
     val THINK_TIME_SEC = System.getProperty("thinktime" , "1").toInt
 
     val RAMP_UP_SEC = System.getProperty("rampUp", "1").toInt
+
+    val RUNID = System.getProperty("runid" ,rundiLocal)
 }
     
