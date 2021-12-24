@@ -1,3 +1,13 @@
+# About this project
+This project allows to send message to IBM MQ as load test using JMS and JNDI connections.
+
+# Features
+> Allows to configure multi queue
+> Templating messages
+> Dynamic scenarion configuration using configuration file [mq.json](./src/gatling/resources/dev/mq.json)
+> Helps shift-left methods to quickly run messages to IBM MQ
+
+
 # Run IBM MQ in dockers
 ```
 docker run --name ibmmq --env LICENSE=accept --env MQ_QMGR_NAME=QM1 --publish 1414:1414 --publish 9443:9443  --env MQ_APP_PASSWORD=passw0rd ibmcom/mq:latest
