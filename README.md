@@ -3,8 +3,11 @@ This project allows to send message to IBM MQ as load test using JMS and JNDI co
 
 # Features
 > Allows to configure multi queue
+
 > Templating messages
+
 > Dynamic scenarion configuration using configuration file [mq.json](./src/gatling/resources/dev/mq.json)
+
 > Helps shift-left methods to quickly run messages to IBM MQ
 
 
