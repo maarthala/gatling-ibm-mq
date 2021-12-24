@@ -21,9 +21,9 @@ Navigate to Manage -> Local Queue Manager -> QM1 -> DEV.QUEUE.1
 
 # run test
 
-1. Configure MQ details at [here](./src/gatling/resources/dev/mq.json) /src/gatling/resources/dev/mq.json
-2. mq.json allows multi queue configuration. You can configure as many queue as you like with respective payload (ie message.txt)
-3. Place your message.txt under  /src/gatling/resources/dev/
+1. Configure MQ details at [here](./src/gatling/resources/dev/mq.json)
+2. [mq.json](./src/gatling/resources/dev/mq.json) allows multi queue configuration. You can configure as many queue as you like with respective [payload](./src/gatling/resources/dev/message.txt)
+3. Place your message.txt under  /src/gatling/resources/dev/  . [Example](./src/gatling/resources/dev/message.txt)
 4. Apply templating varaibles to your message. Example _UUID_ 
 5. run test
 
