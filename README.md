@@ -55,7 +55,7 @@ Navigate to Manage -> Local Queue Manager -> QM1 -> DEV.QUEUE.1
 
 # Message Templating
 
-Currenlty following placeholders are supported. Always check for the latest code for more placeholders. Templating can be extended using [utils](./src/gatling/scala/mq/utils/Utils.scala)
+Currenlty following placeholders are supported. Always check for the latest code for more placeholders. Templating can be extended using [utils](./src/gatling/scala/mq/utils/Utils.scala#L20)
 
 - [X] _UUID_ -> To get UUID in the format XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 - [X] _RANDSTR6_ -> Random string of 6 characters.
