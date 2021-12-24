@@ -1,5 +1,5 @@
 # About this project
-This project allows to send message to IBM MQ as load test using JMS and JNDI connections.
+This project allows to send message to IBM MQ as part of load test using JMS and JNDI connections.
 
 # Features
 > Allows to configure multi queue
@@ -52,3 +52,15 @@ Navigate to Manage -> Local Queue Manager -> QM1 -> DEV.QUEUE.1
 ./gradlew gatlingRun -DmaxDuration=60
 
 ```
+
+# Message Templating
+
+Currenlty following placeholders are supported. Always check for the latest code for more placeholders
+
+- [X] _UUID_ -> To get UUID in the format XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+- [X] _RANDSTR6_ -> Random string of 6 characters.
+- [X] _RANDSTR8_ -> Random string of 8 characters.
+- [ ] _CURRENT_DT_ISO_ -> Current Date time in ISO format
+- [ ] _CURRENT_TS_ -> Current unix timestamp
+- [ ] _RAND_INT_ -> Rand Interger in the range
+- [ ] _RUNID_ -> unix timestamp only once
