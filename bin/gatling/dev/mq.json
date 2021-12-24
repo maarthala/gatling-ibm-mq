@@ -1,0 +1,15 @@
+{
+    "mq1": {
+        "host" : "localhost",
+        "port" : 1414,
+        "queueManager" : "QM1",
+        "channel" : "DEV.APP.SVRCONN",
+        "queueName" : "DEV.QUEUE.1",
+        "authUser" : "app",
+        "authPassword" : "passw0rd", 
+        "bindingPath" : "",
+        "payload" : "message.txt",
+        "users" : 1,
+        "thinktime" : 5
+    }
+}
