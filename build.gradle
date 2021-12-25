@@ -1,42 +1,12 @@
-/*
-
-repositories {
-    mavenCentral()
-}
-
-
-
 plugins {
     // The following line allows to load io.gatling.gradle plugin and directly apply it
     id 'io.gatling.gradle' version '3.7.2'
     id 'scala'
-}
-
-
-dependencies {
-    gatling group: 'org.scala-lang', name: 'scala-library', version: '2.12.8'
-    gatlingImplementation group: 'com.ibm.mq', name: 'com.ibm,mq.allclient', version: '9.1.4.0'
-    gatlingImplementation group: 'javax.jms', name: 'javax.jms-api', version: '2.0.1'
-    gatlingImplementation group: 'com.sun.messaging.mq', name: 'fscontext', version: '4.4.2'
-    gatlingImplementation group: 'net.liftweb', name: 'lift-json_2.13', version: '3.5.5'
 }
 
 gatling {
   // WARNING: options below only work when logback config file isn't provided
   logLevel = 'WARN' // logback root level
-  logHttp = 'NONE' // set to 'ALL' for all HTTP traffic in TRACE, 'FAILURES' for failed HTTP traffic in DEBUG
-}
-*/
-
-plugins {
-    // The following line allows to load io.gatling.gradle plugin and directly apply it
-    id 'io.gatling.gradle' version '3.7.2'
-    id 'scala'
-}
-
-gatling {
-  // WARNING: options below only work when logback config file isn't provided
-  logLevel = 'INFO' // logback root level
   logHttp = 'NONE' // set to 'ALL' for all HTTP traffic in TRACE, 'FAILURES' for failed HTTP traffic in DEBUG
 }
 

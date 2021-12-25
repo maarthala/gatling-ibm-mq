@@ -2,6 +2,6 @@
 .gradle
 .metals
 .vscode
-
+bin/
 # Ignore Gradle build output directory
 build

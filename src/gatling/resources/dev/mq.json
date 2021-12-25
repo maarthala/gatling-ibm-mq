@@ -8,7 +8,20 @@
         "authUser" : "app",
         "authPassword" : "passw0rd", 
         "bindingPath" : "",
-        "payload" : "message.txt",
+        "payload" : "/payload/sample_message1.txt",
+        "users" : 1,
+        "thinktime" : 5
+    },
+    "mq2": {
+        "host" : "localhost",
+        "port" : 1414,
+        "queueManager" : "QM1",
+        "channel" : "DEV.APP.SVRCONN",
+        "queueName" : "DEV.QUEUE.2",
+        "authUser" : "app",
+        "authPassword" : "passw0rd", 
+        "bindingPath" : "",
+        "payload" : "/payload/sample_message2.txt",
         "users" : 1,
         "thinktime" : 5
     }
