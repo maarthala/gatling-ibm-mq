@@ -17,6 +17,8 @@ import com.ibm.msg.client.jms.JmsConnectionFactory._
 import com.ibm.msg.client.jms.JmsFactoryFactory._
 import com.ibm.msg.client.wmq.WMQConstants._
 
+import scala.concurrent.duration._
+
 import mq.config.Model._
 import mq.utils.Utils
 
@@ -56,8 +58,11 @@ trait SimulationTraits extends StrictLogging {
 
         val jmsConfig = jms
             .connectionFactory(connectionFactory)
-            .usePersistentDeliveryMode
             .credentials(mqmodel.authUser, mqmodel.authPassword)
+            .usePersistentDeliveryMode
+            .replyTimeout(100.millis)
+            .matchByCorrelationId
+
         
         return jmsConfig
     }

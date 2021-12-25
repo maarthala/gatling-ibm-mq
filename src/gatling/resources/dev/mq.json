@@ -5,6 +5,7 @@
         "queueManager" : "QM1",
         "channel" : "DEV.APP.SVRCONN",
         "queueName" : "DEV.QUEUE.1",
+        "replyQueue" : "DEV.QUEUE.2",
         "authUser" : "app",
         "authPassword" : "passw0rd", 
         "bindingPath" : "",
@@ -18,10 +19,11 @@
         "queueManager" : "QM1",
         "channel" : "DEV.APP.SVRCONN",
         "queueName" : "DEV.QUEUE.2",
+        "replyQueue" : "DEV.QUEUE.1",
         "authUser" : "app",
         "authPassword" : "passw0rd", 
         "bindingPath" : "",
-        "payload" : "/payload/sample_message2.txt",
+        "payload" : "/payload/sample_message1.txt",
         "users" : 1,
         "thinktime" : 5
     }
