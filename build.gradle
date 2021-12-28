@@ -2,6 +2,7 @@ plugins {
     // The following line allows to load io.gatling.gradle plugin and directly apply it
     id 'io.gatling.gradle' version '3.7.2'
     id 'scala'
+    id 'application'
 }
 
 gatling {
@@ -11,11 +12,20 @@ gatling {
 }
 
 
+application {
+    // Define the main class for the application.
+    mainClass = 'consumer.App'
+}
+
 dependencies {
   gatling 'org.scala-lang:scala-library:2.12.8'
   gatling 'com.ibm.mq:com.ibm.mq.allclient:9.1.4.0'
   gatling 'javax.jms:javax.jms-api:2.0.1'
   gatling 'com.sun.messaging.mq:fscontext:4.4.2'
   gatling 'net.liftweb:lift-json_2.13:3.5.0'
+  implementation 'com.google.guava:guava:30.1.1-jre'
+  implementation 'com.ibm.mq:com.ibm.mq.allclient:9.1.4.0'
+  implementation 'javax.jms:javax.jms-api:2.0.1'
+
 
 }

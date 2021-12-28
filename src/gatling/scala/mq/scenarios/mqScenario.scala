@@ -10,8 +10,8 @@ import javax.jms._
 
 case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
 
-    /*
-    def scenariobase = exec(
+/*
+    def scenarioSend = exec(
         exec {
             session =>
             var bodystr = Utils.readFileFromResource(mqmodel.payload)
@@ -25,8 +25,8 @@ case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
                 //.check(simpleCheck(checkBodyTextCorrect)))
         )
     )
-    */
-
+*/
+///*
       def scenariobase = exec(
         exec {
             session =>
@@ -36,12 +36,14 @@ case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
         }.exec(
             jms(name).requestReply
                 .queue(mqmodel.queueName)
-                .replyQueue(mqmodel.replyQueue)
+                //.replyQueue(mqmodel.replyQueue)                
                 .textMessage(StringBody("#{bodystr}"))
-                .property("test_header", "test_value")
-                .jmsType("test_jms_type")
-                .check(simpleCheck(checkBodyTextCorrect)))
+                .check(simpleCheck(checkBodyTextCorrect))
         )
+    )
+
+ //*/
+
         
 
     val mq = scenario (name)

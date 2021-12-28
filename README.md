@@ -56,6 +56,12 @@ This project was buid using gradle. You might need to install gradle and java.
 
 ```
 
+- To run producer
+```
+./gradlew run
+
+```
+
 # Message Templating
 
 Currenlty following placeholders are supported. Always check for the latest code for more placeholders. Templating can be extended using [utils](./src/gatling/scala/mq/utils/parser.scala)
@@ -71,3 +77,7 @@ Currenlty following placeholders are supported. Always check for the latest code
 - [X] _RUNID_ -> unix timestamp. Once Only per test.   Example : 1640378409
 - [X] _DATE_ -> Only today date in YYYY-MM-DD.   Example : 2021-12-24
 - [X] _TIME_ -> Only current time in HH:MM:SS.   Example : 12:12:12
+
+
+# References
+https://javadoc.io/doc/io.gatling/gatling-jms/latest/io/gatling/jms/action/index.html
