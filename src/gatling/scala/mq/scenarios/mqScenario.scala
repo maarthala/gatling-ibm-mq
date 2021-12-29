@@ -11,22 +11,6 @@ import javax.jms._
 
 case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
 
-    //var headScenario: ScenarioBuilder = null;
-    // var base: ChainBuilder
-
-    // def scenarioSend = exec(
-    //     exec {
-    //         session =>
-    //         var bodystr = Utils.readFileFromResource(mqmodel.payload)
-    //         bodystr =  Utils.setParams(bodystr)
-    //         session.set("bodystr", s"${bodystr}")
-    //     }.exec(
-    //         jms(name).send
-    //             .queue(mqmodel.queueName)
-    //             .textMessage(StringBody("#{bodystr}"))
-    //     )
-    // )
-
     def scenariobase = exec(
         exec {
             session =>
@@ -64,7 +48,6 @@ case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
 
     def checkBodyTextCorrect(m: Message) = {
     print("CorrelationID : " + m.getJMSCorrelationID());  
-    // this assumes that the service just does an "uppercase" transform on the text
     m match {
       case tm: TextMessage => tm.getText.contains(mqmodel.replyValidator)
       case _               => false

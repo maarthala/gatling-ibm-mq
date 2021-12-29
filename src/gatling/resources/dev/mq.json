@@ -5,7 +5,7 @@
         "queueManager" : "QM1",
         "channel" : "DEV.APP.SVRCONN",
         "queueName" : "DEV.QUEUE.1",
-        "replyQueue" : "DEV.QUEUE.2",
+        "replyQueue" : "",
         "replyValidator" : "employee",
         "authUser" : "app",
         "authPassword" : "app", 
