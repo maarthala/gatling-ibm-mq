@@ -52,7 +52,7 @@ public class UtilsTest {
         System.out.println(document);
     }
 
-/*
+
     @Test 
     void preparePayload() {
         Map<String,String> map = new HashMap<String,String>();
@@ -76,7 +76,7 @@ public class UtilsTest {
             String filePropertyFile = Utils.getFileFromResources("params.properties");
             System.out.println(filePropertyFile);
 
-            Map<String,String> map = Utils.getXpathProperties(filePropertyFile);
+            Map<String,String> map = Utils.propToMap(filePropertyFile);
  
             Map<String,String> ouputParams = Utils.getXMLParams(innputDocument, map);
             //System.out.println("OutputMap->" + ouputParams);
@@ -88,28 +88,13 @@ public class UtilsTest {
 
 
             String name = ouputParams.get("VAR1");
-            Assertions.assertEquals(name,"Lokesh");
+            Assertions.assertEquals(name,"33333");
    
 
             String content = Utils.parsePayload(outputContent, ouputParams);
             System.out.println("Output->" + content);
-            Assertions.assertTrue(content.contains("Lokesh"));
+            Assertions.assertTrue(content.contains("33333"));
 
     }
-*/
-
-    public static String textBlocks() {
-        return """
-        <?xml version="1.0" encoding="UTF-8"?>
-        <note>
-           <id>33333</id>
-           <to>Tove-3333</to>
-           <from>Jani-333</from>
-           <heading>Reminder</heading>
-           <phone>333</phone>
-       </note>""";
-    }
-
-
 
 }
