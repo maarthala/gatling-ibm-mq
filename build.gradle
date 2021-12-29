@@ -39,7 +39,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'consumer.App'
+    mainClass = 'main.App'
 }
 
 

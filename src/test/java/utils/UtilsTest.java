@@ -35,18 +35,24 @@ public class UtilsTest {
 
     @Test 
     void readXmlValue() throws Exception  {
-
             String fileContent = Utils.getFileFromResources("input.xml");
             String filePropertyFileContent = Utils.getFileFromResources("params.properties");
             Document document = Utils.loadXMLFrom(fileContent);
-            Map<String,String> map = Utils.getXpathProperties(filePropertyFileContent);
-
+            Map<String,String> map = Utils.propToMap(filePropertyFileContent);
             Map<String,String> params = Utils.getXMLParams(document, map);
+            System.out.println(params);
             String value = params.get("VAR1");
-            Assertions.assertEquals(value,"Lokesh");
+            Assertions.assertEquals(value,"33333");
     }
 
+    @Test 
+    void readXml2Document() throws Exception  {
+        String fileContent = Utils.getFileFromResources("input.xml");
+        Document document = Utils.loadXMLFrom(fileContent);
+        System.out.println(document);
+    }
 
+/*
     @Test 
     void preparePayload() {
         Map<String,String> map = new HashMap<String,String>();
@@ -90,6 +96,20 @@ public class UtilsTest {
             Assertions.assertTrue(content.contains("Lokesh"));
 
     }
+*/
+
+    public static String textBlocks() {
+        return """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <note>
+           <id>33333</id>
+           <to>Tove-3333</to>
+           <from>Jani-333</from>
+           <heading>Reminder</heading>
+           <phone>333</phone>
+       </note>""";
+    }
+
 
 
 }

@@ -57,6 +57,7 @@ public  class Utils {
     }
 
     public static Document loadXMLFrom(String xml) throws TransformerException {
+        System.out.println(xml);
         Source source = new StreamSource(new StringReader(xml));
         DOMResult result = new DOMResult();
         TransformerFactory.newInstance().newTransformer().transform(source , result);
@@ -88,7 +89,7 @@ public  class Utils {
     // extract values from XML based on properties file map
     public static Map<String,String> getXMLParams(Document document , Map<String, String> paramList) throws Exception  {
         Map<String, String> mapr = new HashMap<String, String>();
-        
+        System.out.println(paramList);
         for (String name : paramList.keySet())
         {
             String xpath = paramList.get(name);
@@ -104,7 +105,7 @@ public  class Utils {
     }
 
     // Convert Properties file content to map
-    public static Map<String, String> getXpathProperties(String filePropertyFileContent){
+    public static Map<String, String> propToMap(String filePropertyFileContent){
         Properties getProperties = new Properties();
         
         Map<String, String> propertyMap = new HashMap<String, String>();
@@ -126,4 +127,5 @@ public  class Utils {
         }
         return payloadFile;
     }
+
 }
