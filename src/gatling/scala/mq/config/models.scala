@@ -10,6 +10,7 @@ object Model extends StrictLogging {
     channel: String,
     queueName: String,
     replyQueue: String,
+    replyValidator: String,
     authUser: String,
     authPassword: String,
     bindingPath: String,

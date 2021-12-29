@@ -20,29 +20,35 @@ import com.ibm.msg.client.wmq.WMQConstants;
 import com.ibm.mq.constants.MQConstants;
 import com.ibm.mq.MQException;
 import com.ibm.msg.client.jms.DetailedInvalidDestinationException;
-import com.ibm.mq.jms.MQDestination;
+import utils.*;
+import java.util.Map;
+import  utils.Parser;
+import org.w3c.dom.Document;
 
-//import com.ibm.mq.samples.jms.SampleEnvSetter;
 
 public class App {
 
     private static final Level LOGLEVEL = Level.ALL;
     private static final Logger logger = Logger.getLogger("com.ibm.mq.samples.jms");
 
-    // Create variables for the connection to MQ
-    private static String ConnectionString = "localhost(1414)";
-    private static String CHANNEL ="DEV.APP.SVRCONN"; // Channel name
-    private static String QMGR = "QM1"; // Queue manager name
-    private static String APP_USER ="app"; // User name that application uses to connect to MQ
-    private static String APP_PASSWORD ="app"; // Password that the application uses to connect to MQ
-    private static String QUEUE_NAME ="DEV.QUEUE.1"; // Queue that the application uses to put and get messages to and from
     private static String CIPHER_SUITE;
     private static String CCDTURL;
+    private static Map<String,String> MQPARAMS;
 
     public static void main(String[] args) {
+
         initialiseLogging();
-        //mqConnectionVariables();
-        logger.info("Put application is starting");
+        String x = Parser.uuidgen();
+
+        String mqParamsContent = "";
+        try {
+            mqParamsContent = Utils.getFileFromResources("mq.properties");
+        }   catch(Exception e) {
+
+        }
+        logger.info(mqParamsContent);
+        MQPARAMS = Utils.getXpathProperties(mqParamsContent);
+        logger.info("Put application is starting" + x);
 
         JMSContext context;
         Destination destination;
@@ -54,7 +60,7 @@ public class App {
 
         context = connectionFactory.createContext();
         logger.info("context created");
-        destination = context.createQueue("queue:///" + QUEUE_NAME);
+        destination = context.createQueue("queue:///" + MQPARAMS.get("READ_QUEUE"));
         logger.info("destination created");
         consumer = context.createConsumer(destination);
         logger.info("consumer created");
@@ -62,8 +68,8 @@ public class App {
         while (true) {
             try {
                 Message receivedMessage = consumer.receive();
-                long extractedValue = getAndDisplayMessageBody(receivedMessage);
-                replyToMessage(context, receivedMessage, extractedValue);
+                //long extractedValue = getAndDisplayMessageBody(receivedMessage);
+                replyToMessage(context, receivedMessage);
             } catch (JMSRuntimeException jmsex) {
 
                 jmsex.printStackTrace();
@@ -93,13 +99,16 @@ public class App {
         return responseValue;
     }
 
-    private static void replyToMessage(JMSContext context, Message receivedMessage, long extractedValue) {
+    private static void replyToMessage(JMSContext context, Message receivedMessage) {
         try {
             if (receivedMessage instanceof Message) {
                 Destination destination = receivedMessage.getJMSReplyTo();
                 String correlationID = receivedMessage.getJMSCorrelationID();
                 logger.info("correclation id: " + correlationID);
-                TextMessage message = context.createTextMessage("hello");
+
+                String replyMsgBody = replayMessageBody(receivedMessage.getBody(String.class));
+                System.out.println(replyMsgBody);
+                TextMessage message = context.createTextMessage(replyMsgBody);
                 message.setJMSCorrelationID(correlationID);
                 JMSProducer producer = context.createProducer();
                 // Make sure message put on a reply queue is non-persistent so non XMS/JMS apps
@@ -160,19 +169,6 @@ public class App {
         return null;
     }
 
-    // private static void mqConnectionVariables() {
-    //     SampleEnvSetter env = new SampleEnvSetter();
-    //     int index = 0;
-    //     ConnectionString = env.getConnectionString();
-    //     CHANNEL = env.getEnvValue("CHANNEL", index);
-    //     QMGR = env.getEnvValue("QMGR", index);
-    //     APP_USER = env.getEnvValue("APP_USER", index);
-    //     APP_PASSWORD = env.getEnvValue("APP_PASSWORD", index);
-    //     QUEUE_NAME = env.getEnvValue("QUEUE_NAME", index);
-    //     CIPHER_SUITE = env.getEnvValue("CIPHER_SUITE", index);
-
-    //     CCDTURL = env.getCheckForCCDT();
-    // }
 
     private static JmsConnectionFactory createJMSConnectionFactory() {
         JmsFactoryFactory ff;
@@ -188,20 +184,21 @@ public class App {
     }
 
     private static void setJMSProperties(JmsConnectionFactory cf) {
+        
         try {
             if (null == CCDTURL) {
-                cf.setStringProperty(WMQConstants.WMQ_CONNECTION_NAME_LIST, ConnectionString);
-                cf.setStringProperty(WMQConstants.WMQ_CHANNEL, CHANNEL);
+                cf.setStringProperty(WMQConstants.WMQ_CONNECTION_NAME_LIST, MQPARAMS.get("MQ_HOST"));
+                cf.setStringProperty(WMQConstants.WMQ_CHANNEL, MQPARAMS.get("CHANNEL"));
             } else {
                 logger.info("Will be making use of CCDT File " + CCDTURL);
                 cf.setStringProperty(WMQConstants.WMQ_CCDTURL, CCDTURL);
             }
             cf.setIntProperty(WMQConstants.WMQ_CONNECTION_MODE, WMQConstants.WMQ_CM_CLIENT);
-            cf.setStringProperty(WMQConstants.WMQ_QUEUE_MANAGER, QMGR);
+            cf.setStringProperty(WMQConstants.WMQ_QUEUE_MANAGER, MQPARAMS.get("QMGR"));
             cf.setStringProperty(WMQConstants.WMQ_APPLICATIONNAME, "JmsBasicResponse (JMS)");
             cf.setBooleanProperty(WMQConstants.USER_AUTHENTICATION_MQCSP, true);
-            cf.setStringProperty(WMQConstants.USERID, APP_USER);
-            cf.setStringProperty(WMQConstants.PASSWORD, APP_PASSWORD);
+            cf.setStringProperty(WMQConstants.USERID, MQPARAMS.get("APP_USER"));
+            cf.setStringProperty(WMQConstants.PASSWORD, MQPARAMS.get("APP_PASSWORD"));
             if (CIPHER_SUITE != null && !CIPHER_SUITE.isEmpty()) {
                 cf.setStringProperty(WMQConstants.WMQ_SSL_CIPHER_SUITE, CIPHER_SUITE);
             }
@@ -250,6 +247,30 @@ public class App {
 
         logger.setLevel(LOGLEVEL);
         logger.finest("Logging initialised");
+    }
+
+    private static String replayMessageBody(String receivedMessage) {
+
+        String replyPayload  = MQPARAMS.get("PAYLOAD").trim();
+
+        if (replyPayload.length() != 0) {
+
+            try {
+                Document innputDocument = Utils.loadXMLFrom(receivedMessage); 
+                String outputContent = Utils.getFileFromResources(MQPARAMS.get("PAYLOAD"));
+                String filePropertyFile = Utils.getFileFromResources("params.properties");
+                Map<String,String> map = Utils.getXpathProperties(filePropertyFile);
+                Map<String,String> ouputParams = Utils.getXMLParams(innputDocument, map);
+                Map<String,String> mapGeneric = Parser.replacerMap;
+                mapGeneric.forEach((k, v) -> ouputParams.merge(k, v, (oldValue, newValue) -> oldValue));
+                String content = Utils.parsePayload(outputContent, ouputParams);
+                return content;
+
+            }  catch(Exception e) {
+
+            }
+        }
+        return  receivedMessage;
     }
 
 }

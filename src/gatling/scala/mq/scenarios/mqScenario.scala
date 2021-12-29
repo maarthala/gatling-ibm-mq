@@ -26,7 +26,7 @@ case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
         )
     )
 */
-///*
+
       def scenariobase = exec(
         exec {
             session =>
@@ -36,15 +36,11 @@ case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
         }.exec(
             jms(name).requestReply
                 .queue(mqmodel.queueName)
-                //.replyQueue(mqmodel.replyQueue)                
+                .replyQueue(mqmodel.replyQueue)                
                 .textMessage(StringBody("#{bodystr}"))
                 .check(simpleCheck(checkBodyTextCorrect))
         )
     )
-
- //*/
-
-        
 
     val mq = scenario (name)
     .during (MAX_DURATION_SEC){
@@ -53,12 +49,11 @@ case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
     }
 
     def checkBodyTextCorrect(m: Message) = {
-    print ("here")
-    print (m);  
+    print("CorrelationID : " + m.getJMSCorrelationID());  
     // this assumes that the service just does an "uppercase" transform on the text
     m match {
-      case tm: TextMessage => tm.getText == "hello"
-      case _               => true
+      case tm: TextMessage => tm.getText.contains(mqmodel.replyValidator)
+      case _               => false
     }
   }
 }

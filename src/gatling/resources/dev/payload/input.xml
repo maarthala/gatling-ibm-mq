@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <note>
+    <id>_UUID_</id>
+    <to>Tove-_RAND_STR8_</to>
+    <from>Jani-_RAND_STR8_</from>
+    <heading>Reminder</heading>
+    <phone>_RAND_INT8_</phone>
+</note>
