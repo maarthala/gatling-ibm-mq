@@ -8,39 +8,53 @@ import scala.io.Source._
 import mq.utils.Utils
 import javax.jms._
 
+
 case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
 
-/*
-    def scenarioSend = exec(
-        exec {
-            session =>
-            var bodystr = Utils.readFileFromResource(mqmodel.payload)
-            bodystr =  Utils.setParams(bodystr)
-            session.set("bodystr", s"${bodystr}")
-        }.exec(
-            jms(name).send
-                .queue(mqmodel.queueName)
-                //.replyQueue("DEV.QUEUE.2")
-                .textMessage(StringBody("#{bodystr}"))
-                //.check(simpleCheck(checkBodyTextCorrect)))
-        )
-    )
-*/
+    //var headScenario: ScenarioBuilder = null;
+    // var base: ChainBuilder
 
-      def scenariobase = exec(
+    // def scenarioSend = exec(
+    //     exec {
+    //         session =>
+    //         var bodystr = Utils.readFileFromResource(mqmodel.payload)
+    //         bodystr =  Utils.setParams(bodystr)
+    //         session.set("bodystr", s"${bodystr}")
+    //     }.exec(
+    //         jms(name).send
+    //             .queue(mqmodel.queueName)
+    //             .textMessage(StringBody("#{bodystr}"))
+    //     )
+    // )
+
+    def scenariobase = exec(
         exec {
             session =>
             var bodystr = Utils.readFileFromResource(mqmodel.payload)
             bodystr =  Utils.setParams(bodystr)
-            session.set("bodystr", s"${bodystr}")
-        }.exec(
+            var replyQflag = "1"
+            if ( mqmodel.replyQueue.length() == 0 ) {
+                replyQflag = "0"
+            }
+            session.set("bodystr", s"${bodystr}").set("replyQflag" , s"${replyQflag}")
+        }.doIfEqualsOrElse( "#{replyQflag}", "0")  { 
+        exec(
+           jms(name).send
+                .queue(mqmodel.queueName)
+                .textMessage(StringBody("#{bodystr}"))
+        )
+        } {
+            exec(
             jms(name).requestReply
                 .queue(mqmodel.queueName)
                 .replyQueue(mqmodel.replyQueue)                
                 .textMessage(StringBody("#{bodystr}"))
                 .check(simpleCheck(checkBodyTextCorrect))
-        )
+            )
+
+        }
     )
+    
 
     val mq = scenario (name)
     .during (MAX_DURATION_SEC){

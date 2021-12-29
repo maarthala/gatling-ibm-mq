@@ -10,6 +10,7 @@ import mq.config.Config._
 trait BaseScenario extends StrictLogging   {
 
     def scenariobase: ChainBuilder
+    //def scenarioSend: ChainBuilder
 
     var env: String = System.getProperty("env", "local")
 }

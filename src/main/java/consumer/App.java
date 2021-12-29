@@ -103,14 +103,22 @@ public class App {
         try {
             if (receivedMessage instanceof Message) {
                 Destination destination = receivedMessage.getJMSReplyTo();
+                
+                // System.out.println(destination);
+                // if (MQPARAMS.get("WRITE_QUEUE").trim().length() != 0) {
+                //     destination = context.createQueue("queue:///" + MQPARAMS.get("WRITE_QUEUE"));
+                // }
+
                 String correlationID = receivedMessage.getJMSCorrelationID();
-                logger.info("correclation id: " + correlationID);
+                logger.info("JMSCorrelationID: " + correlationID);
 
                 String replyMsgBody = replayMessageBody(receivedMessage.getBody(String.class));
                 System.out.println(replyMsgBody);
                 TextMessage message = context.createTextMessage(replyMsgBody);
+
                 message.setJMSCorrelationID(correlationID);
                 JMSProducer producer = context.createProducer();
+                
                 // Make sure message put on a reply queue is non-persistent so non XMS/JMS apps
                 // can get the message off the temp reply queue
                 producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);

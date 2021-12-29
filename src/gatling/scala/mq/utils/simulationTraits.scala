@@ -50,8 +50,7 @@ trait SimulationTraits extends StrictLogging {
     }
 
     def getJmsConf(mqmodel: MQ ): JmsProtocolBuilder  = {
-        println(mqmodel)
-
+   
         /*
         val cf = new MQConnectionFactory()
             cf.setHostName(mqmodel.host)
