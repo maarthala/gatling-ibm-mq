@@ -3,25 +3,10 @@ package utils;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.Assertions;
-// import com.google.common.base.Charsets;
-// import java.util.logging.*;
 import org.json.*;
 import org.w3c.dom.Document;
-// import javax.xml.xpath.XPath;
-// import javax.xml.xpath.XPathConstants;
-// import javax.xml.xpath.XPathExpressionException;
-// import javax.xml.xpath.XPathFactory;
-// import java.util.List;
 import java.util.HashMap;
-// import java.util.Iterator;
 import java.util.Map;
-// import java.io.ByteArrayOutputStream;
-// import java.io.PrintStream;
-// import org.junit.contrib.java.lang.system.SystemOutRule;
-// import org.junit.Assert;
-// import org.junit.Rule;
-
-
 
 public class UtilsTest {
 
