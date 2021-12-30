@@ -4,6 +4,8 @@ This project allows to send message to IBM MQ as part of load test using JMS and
 # Features
 > Allows to configure multi queue
 
+> Consumer
+
 > Supports replyTo
 
 > Templating messages
@@ -56,20 +58,20 @@ This project was buid using gradle. You might need to install gradle and java.
 
 ```
 
-# Producer support respond to replayQueue configured in Gatling Test using dynamic payload , including correlation from received message (XML only)
+# Consumer support respond to replayQueue configured in Gatling Test using dynamic payload , including correlation from received message (XML only)
 
-## How to use producer
-Producer has 3 configuration files based on the requirement
+## How to use Consumer
+Consumer has 3 configuration files based on the requirement
 
-- /src/main/resources/mq.properties >  MQ Details (Note: if WRITE_QUEUE has value, producer overwrite replyQueue from gatling )
+- /src/main/resources/mq.properties >  MQ Details (Note: if WRITE_QUEUE has value, Consumer overwrite replyQueue from gatling )
 - /src/main/resources/params.propertie > Properties file for xpath correlation in XML files. Variables are placeholders in payload (example : output.xml)
-- payload (example : /src/main/resources/output.xml) > Producer send this output.xml content as a response to the message received in READ_QUEUE
+- payload (example : /src/main/resources/output.xml) > Consumer send this output.xml content as a response to the message received in READ_QUEUE
 
 ## Templating
-Similar to gatling, producer also supports templating. Gatling and Producer support same placeholders. To use placeholders, define placeholder in this format ${}  Example: ${UUID} or correlation from params.properties  Example ${VAR1}
+Similar to gatling, Consumer also supports templating. Gatling and Consumer support same placeholders. To use placeholders, define placeholder in this format ${}  Example: ${UUID} or correlation from params.properties  Example ${VAR1}
 
 
-- To run producer
+- To run Consumer
 ```
 ./gradlew run
 
