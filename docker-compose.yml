@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  ibmmq-ui:
+    image: ibmcom/mq:latest
+    container_name: ibmmq-ui
+    environment:
+      - LICENSE=accept
+      - MQ_QMGR_NAME=QM1
+      - MQ_APP_PASSWORD=app
+    ports:
+      - "1414:1414"
+      - "9443:9443"
+    networks:
+      - mqtest
+    healthcheck:
+      test: ["CMD", "curl", "-f",  "-k" , "https://ibmmq-ui:9443/ibmmq/console/login.html"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  producer:
+    build:
+      dockerfile: Dockerfile.producer
+      context: .
+    # container_name: producer
+    command: gradle run
+    networks:
+      - mqtest
+    depends_on:
+      ibmmq-ui:
+        condition: service_healthy
+  gatling:
+    build:
+      dockerfile: Dockerfile.producer
+      context: .
+    container_name: gatling
+    command: gradle build gatlingRun
+    networks:
+      - mqtest
+    depends_on:
+      ibmmq-ui:
+        condition: service_healthy
+    volumes:
+      - ./build:/app/build
+networks:
+  mqtest:
+    driver: bridge

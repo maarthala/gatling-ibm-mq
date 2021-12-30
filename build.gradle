@@ -2,6 +2,7 @@ plugins {
     // The following line allows to load io.gatling.gradle plugin and directly apply it
     id 'io.gatling.gradle' version '3.7.2'
     id 'scala'
+    id 'application'
 }
 
 gatling {
@@ -11,11 +12,48 @@ gatling {
 }
 
 
+
+
 dependencies {
   gatling 'org.scala-lang:scala-library:2.12.8'
   gatling 'com.ibm.mq:com.ibm.mq.allclient:9.1.4.0'
   gatling 'javax.jms:javax.jms-api:2.0.1'
   gatling 'com.sun.messaging.mq:fscontext:4.4.2'
   gatling 'net.liftweb:lift-json_2.13:3.5.0'
+  
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+  implementation 'com.google.guava:guava:30.1.1-jre'
+  implementation 'com.ibm.mq:com.ibm.mq.allclient:9.1.4.0'
+  //implementation 'javax.jms:javax.jms-api:2.0.1'
+  implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+  implementation 'org.apache.commons:commons-collections4:4.4'
+  implementation 'javax.json:javax.json-api:1.1.4'
+  implementation 'org.json:json:20211205'
+  testImplementation 'com.github.stefanbirkner:system-rules:1.19.0'
 
+  //implementation 'javax.xml.parsers:jaxp-api:1.4.5'
+  //implementation 'org.w3c:dom:2.3.0-jaxb-1.0.6'
+
+
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'main.App'
+}
+
+
+sourceSets {
+        main {
+                java {
+                        srcDirs= ["src/main/java"]
+                }
+                resources {
+                        srcDirs= ["src/main/resources"]
+                }
+        }
+}
+
+test {
+    useJUnitPlatform() 
 }

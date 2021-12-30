@@ -1,0 +1,3 @@
+from gradle
+WORKDIR /app
+COPY . .
