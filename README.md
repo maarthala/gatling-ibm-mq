@@ -58,9 +58,10 @@ This project was buid using gradle. You might need to install gradle and java.
 
 ```
 
-# Consumer support respond to replayQueue configured in Gatling Test using dynamic payload , including correlation from received message (XML only)
+Consumer support respond to replayQueue configured in Gatling Test using dynamic payload , including correlation from received message (XML only)
 
 ## How to use Consumer
+
 Consumer has 3 configuration files based on the requirement
 
 - /src/main/resources/mq.properties >  MQ Details (Note: if WRITE_QUEUE has value, Consumer overwrite replyQueue from gatling )
@@ -76,6 +77,29 @@ Similar to gatling, Consumer also supports templating. Gatling and Consumer supp
 ./gradlew run
 
 ```
+
+# Using docker-compose Execution
+
+After configuring the files, run docker-compose as below
+
+```
+docker-compose up --build
+
+```
+
+After the test is completed, bring the docker-compose using 
+
+```
+docker-compose down
+
+```
+
+# Results 
+
+Results are located in ${PWD}/build/reports/gatling/basicsimulation-xxxxxxx/index.html
+
+
+
 
 # Message Templating
 
