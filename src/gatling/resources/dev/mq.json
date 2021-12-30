@@ -1,6 +1,6 @@
 {
     "mq1": {
-        "host" : "localhost",
+        "host" : "ibmmq-ui",
         "port" : 1414,
         "queueManager" : "QM1",
         "channel" : "DEV.APP.SVRCONN",
@@ -11,7 +11,7 @@
         "authPassword" : "app", 
         "bindingPath" : "",
         "payload" : "/payload/input.xml",
-        "users" : 1,
-        "thinktime" : 5
+        "users" : 10,
+        "thinktime" : 2
     }
 }

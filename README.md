@@ -1,8 +1,10 @@
 # About this project
-This project allows to send message to IBM MQ as part of load test using JMS and JNDI connections. Example configuration in this project send message to IBM MQ running in dockers.
+This project allows to send message to IBM MQ as part of load test using JMS and JNDI connections. Example configuration in this project use IBM MQ running in dockers to send message.
 
 # Features
 > Allows to configure multi queue
+
+> Supports replyTo
 
 > Templating messages
 
@@ -10,6 +12,7 @@ This project allows to send message to IBM MQ as part of load test using JMS and
 
 > Helps shift-left methods to quickly run messages to IBM MQ
 
+# Manual Execution
 
 # Run IBM MQ in dockers
 To run this project locally, you need IBM MQ running. Run IBM docker using below command.
@@ -17,11 +20,6 @@ To run this project locally, you need IBM MQ running. Run IBM docker using below
 docker run --name ibmmq --env LICENSE=accept --env MQ_QMGR_NAME=QM1 --publish 1414:1414 --publish 9443:9443  --env MQ_APP_PASSWORD=passw0rd ibmcom/mq:latest
 ```
 
-# Connect to docker and run below commands to provide access to app user
-```
-docker exec ibmmq   setmqaut -m QM1 -n SYSTEM.DEFAULT.MODEL.QUEUE -t queue -p app +dsp +get +put
-docker exec ibmmq  dspmqaut -m QM1 -n SYSTEM.DEFAULT.MODEL.QUEUE -t queue -p app
-```
 
 # Open IBM MQ 
 
@@ -34,6 +32,8 @@ password: passw0rd
 
 Navigate to Manage -> Local Queue Manager -> QM1 -> DEV.QUEUE.1
 
+## Configuration
+[mq.json](./src/gatling/resources/dev/mq.json) contains MQ configration. Note. If replyQueue is defined, gatling will automatically add replyQueue and wait for the response otherwise gatling send message without wait.  
 
 # run test
 
@@ -55,6 +55,19 @@ This project was buid using gradle. You might need to install gradle and java.
 ./gradlew gatlingRun -DmaxDuration=60
 
 ```
+
+# Producer support respond to replayQueue configured in Gatling Test using dynamic payload , including correlation from received message (XML only)
+
+## How to use producer
+Producer has 3 configuration files based on the requirement
+
+- /src/main/resources/mq.properties >  MQ Details (Note: if WRITE_QUEUE has value, producer overwrite replyQueue from gatling )
+- /src/main/resources/params.propertie > Properties file for xpath correlation in XML files. Variables are placeholders in payload (example : output.xml)
+- payload (example : /src/main/resources/output.xml) > Producer send this output.xml content as a response to the message received in READ_QUEUE
+
+## Templating
+Similar to gatling, producer also supports templating. Gatling and Producer support same placeholders. To use placeholders, define placeholder in this format ${}  Example: ${UUID} or correlation from params.properties  Example ${VAR1}
+
 
 - To run producer
 ```
