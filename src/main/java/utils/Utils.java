@@ -1,20 +1,7 @@
 package utils;
 
-
-
-// import java.io.FileReader;
-// import java.io.IOException;
-// import java.io.Reader;
 import java.io.StringReader;
-// import java.util.Iterator;
-
-// import org.json.simple.JSONArray;
-// import org.json.simple.JSONObject;
-// import org.json.simple.parser.JSONParser;
-// import org.json.simple.parser.ParseException;
-
 import java.io.InputStream;
-// import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
@@ -37,7 +24,6 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import java.util.HashMap;
-// import java.util.Iterator;
 import java.util.Map;
 
 import java.io.ByteArrayInputStream;
