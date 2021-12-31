@@ -12,7 +12,7 @@ public class UtilsTest {
 
     @Test 
     void readFile() throws Exception  {
-            String fileContent = Utils.getFileFromResources("test.json");
+            String fileContent = Utils.getFileFromResources("payload/test.json");
             JSONObject jsonObject = new JSONObject(fileContent);
             Assertions.assertEquals(jsonObject.getString("name"),"hello");
     }
@@ -20,8 +20,8 @@ public class UtilsTest {
 
     @Test 
     void readXmlValue() throws Exception  {
-            String fileContent = Utils.getFileFromResources("input.xml");
-            String filePropertyFileContent = Utils.getFileFromResources("params.properties");
+            String fileContent = Utils.getFileFromResources("/payload/input.xml");
+            String filePropertyFileContent = Utils.getFileFromResources("xpath.props");
             Document document = Utils.loadXMLFrom(fileContent);
             Map<String,String> map = Utils.propToMap(filePropertyFileContent);
             Map<String,String> params = Utils.getXMLParams(document, map);
@@ -32,7 +32,7 @@ public class UtilsTest {
 
     @Test 
     void readXml2Document() throws Exception  {
-        String fileContent = Utils.getFileFromResources("input.xml");
+        String fileContent = Utils.getFileFromResources("payload/input.xml");
         Document document = Utils.loadXMLFrom(fileContent);
         System.out.println(document);
     }
@@ -52,30 +52,25 @@ public class UtilsTest {
     @Test
     void testOutputXml() throws Exception {
 
-            String inputContent = Utils.getFileFromResources("input.xml");
+            String inputContent = Utils.getFileFromResources("payload/input.xml");
             Document innputDocument = Utils.loadXMLFrom(inputContent);  
             
-            String outputContent = Utils.getFileFromResources("output.xml");
-            //System.out.println("Template->" + outputContent);
+            String outputContent = Utils.getFileFromResources("payload/output.xml");
 
-            String filePropertyFile = Utils.getFileFromResources("params.properties");
+            String filePropertyFile = Utils.getFileFromResources("xpath.props");
             System.out.println(filePropertyFile);
 
             Map<String,String> map = Utils.propToMap(filePropertyFile);
  
             Map<String,String> ouputParams = Utils.getXMLParams(innputDocument, map);
-            //System.out.println("OutputMap->" + ouputParams);
 
             Map<String,String> mapGeneric = Parser.replacerMap;
 
             mapGeneric.forEach((k, v) -> ouputParams.merge(k, v, (oldValue, newValue) -> oldValue));
-            System.out.println(ouputParams);
-
-
+  
             String name = ouputParams.get("VAR1");
             Assertions.assertEquals(name,"33333");
    
-
             String content = Utils.parsePayload(outputContent, ouputParams);
             System.out.println("Output->" + content);
             Assertions.assertTrue(content.contains("33333"));

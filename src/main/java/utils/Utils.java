@@ -39,13 +39,15 @@ public  class Utils {
 
     public static String getFileFromResources(String fileName) throws Exception {
 
-        String resourcePath = System.getProperty("resource");
+        fileName = fileName.startsWith("/") ? fileName.substring(1) : fileName;
+        String resourcePath = System.getProperty("resources");
         
         ClassLoader classLoader = Utils.class.getClassLoader();
         InputStream stream = classLoader.getResourceAsStream(fileName);
         
-        if (resourcePath.length() > 0) {
+        if (resourcePath != null) {
             fileName = resourcePath + "/" + fileName;
+            
             File initialFile = new File(fileName);
             stream = new FileInputStream(initialFile);
         }

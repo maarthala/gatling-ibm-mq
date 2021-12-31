@@ -6,10 +6,10 @@ object Config extends StrictLogging {
 
     val rundiLocal = (System.currentTimeMillis() / 1000L).toString();
 
-    val ENV_DEV: String = "dev"
-    val ENV_PERF: String = "perf"
+    // val ENV_DEV: String = "dev"
+    // val ENV_PERF: String = "perf"
 
-    val BASE_ENV = System.getProperty("env","dev")
+    // val BASE_ENV = System.getProperty("env","dev")
 
     val MAX_DURATION_SEC = System.getProperty("maxDuration" , "1").toInt * 60
 
