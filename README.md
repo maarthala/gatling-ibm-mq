@@ -50,6 +50,7 @@ This project was buid using gradle. You might need to install gradle and java.
 - By default test runs for 1 min
 ```
 ./gradlew gatlingRun
+./gradle clean gatlingRun -Drunid=A1111 -Dresource=${HOME}/mydata/resources/dev
 ```
 
 - To run test for  1 hour

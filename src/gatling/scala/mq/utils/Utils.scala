@@ -19,16 +19,18 @@ import mq.utils.Parser
 
 object Utils  extends  SimulationTraits {
 
-    def readFileFromResource (filename :String) : String = {
-        val file = s"${BASE_ENV}/$filename"
-        val content = Source.fromResource(file)(Codec.ISO8859).getLines().mkString
-        return content
+
+    def getPath(path : String) : String = {
+
+        if ( TESTDATA_FOLDER.trim.length() != 0 ) {
+            return  s"${TESTDATA_FOLDER}/$path"
+        } 
+        return getClass.getClassLoader.getResource(path).getPath
     }
 
-    def readBindingFileFromResource(filename :String) : String = {
-        val file = s"${BASE_ENV}/bindings/$filename"
-        val path = getClass.getClassLoader.getResource(file).getPath
-        return path
+    def readFileFromResource (filename :String) : String = {
+        var file = getPath(filename)
+        return  Source.fromFile(file)(Codec.ISO8859).getLines().mkString
     }
 
     def setParams (content :String) : String = {

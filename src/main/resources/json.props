@@ -1,0 +1,2 @@
+VAR1=$.id
+VAR2=$[?[@.id == "test"]].name

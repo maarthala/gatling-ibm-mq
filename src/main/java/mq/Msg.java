@@ -103,7 +103,7 @@ public class Msg  {
             try {
                 Document innputDocument = Utils.loadXMLFrom(receivedMessage); 
                 String outputContent = Utils.getFileFromResources(Config.MQPARAMS.get("PAYLOAD"));
-                String filePropertyFile = Utils.getFileFromResources("params.properties");
+                String filePropertyFile = Utils.getFileFromResources("xpath.props");
                 Map<String,String> map = Utils.propToMap(filePropertyFile);
                 Map<String,String> ouputParams = Utils.getXMLParams(innputDocument, map);
                 Map<String,String> mapGeneric = Parser.replacerMap;

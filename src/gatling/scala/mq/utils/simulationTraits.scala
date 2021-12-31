@@ -36,7 +36,7 @@ trait SimulationTraits extends StrictLogging {
 
     def getJndiConf(mqmodel: MQ): JmsProtocolBuilder  = {
 
-        var bindingFile = Utils.readBindingFileFromResource(mqmodel.bindingPath)
+        var bindingFile = Utils.getPath(mqmodel.bindingPath)
         val jndiBasedConnectionFactory = jmsJndiConnectionFactory
             .connectionFactoryName("qcf")
             .url(s"file://$bindingFile")

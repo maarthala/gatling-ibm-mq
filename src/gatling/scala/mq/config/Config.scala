@@ -18,5 +18,14 @@ object Config extends StrictLogging {
     val RAMP_UP_SEC = System.getProperty("rampUp", "1").toInt
 
     val RUNID = System.getProperty("runid" ,rundiLocal)
+
+    val TESTDATA_FOLDER  = System.getProperty("resource" , "")
+
+    println( "***********  TEST DETAILS **********" )
+    println("Runid :" + RUNID)
+    println("Resource Folder :" + TESTDATA_FOLDER)
+    
+    println( "***********  END **********" )
+
 }
     
