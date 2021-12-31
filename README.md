@@ -77,6 +77,8 @@ Similar to gatling, Consumer also supports templating. Gatling and Consumer supp
 ```
 ./gradlew run
 
+gradle run  -Dresource=${HOME}/tmp/resources/dev
+
 ```
 
 # Using docker-compose Execution

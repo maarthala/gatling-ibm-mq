@@ -3,6 +3,9 @@ package utils;
 import java.io.StringReader;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import javax.xml.transform.Source;
@@ -27,14 +30,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 
 
 public  class Utils {
 
 
     public static String getFileFromResources(String fileName) throws Exception {
+
+        String resourcePath = System.getProperty("resource");
+        
         ClassLoader classLoader = Utils.class.getClassLoader();
         InputStream stream = classLoader.getResourceAsStream(fileName);
+        
+        if (resourcePath.length() > 0) {
+            fileName = resourcePath + "/" + fileName;
+            File initialFile = new File(fileName);
+            stream = new FileInputStream(initialFile);
+        }
+        
         String text = null;
         try (Scanner scanner = new Scanner(stream, StandardCharsets.UTF_8.name())) {
             text = scanner.useDelimiter("\\A").next();

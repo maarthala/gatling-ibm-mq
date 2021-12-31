@@ -11,7 +11,7 @@ public class Config {
 
         String mqParamsContent = "";
         try {
-            mqParamsContent = Utils.getFileFromResources("mq.properties");
+            mqParamsContent = Utils.getFileFromResources("mq.props");
         }   catch(Exception e) {
 
         }

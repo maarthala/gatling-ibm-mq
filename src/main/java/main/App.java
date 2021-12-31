@@ -11,21 +11,28 @@ import javax.jms.Message;
 import javax.jms.JMSRuntimeException;
 
 import com.ibm.msg.client.jms.JmsConnectionFactory;
-import java.util.Map;
+
 import  utils.Parser;
 import logging.*;
 import mq.*;
 import jms.*;
 import config.Config;
 
+import java.util.Properties;
+
+import org.apache.commons.cli.*;
+
+
 public class App {
 
     private static final Logger logger = Logger.getLogger("com.ibm.mq.samples.jms");
     
-    public static void main(String[] args) {
+    public static void main(String[] parameter) {
 
         Logging.initialiseLogging();
         String x = Parser.uuidgen();
+
+
         Config.Config();
 
         logger.info("Put application is starting : " + x);
