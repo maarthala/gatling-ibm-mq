@@ -62,13 +62,13 @@ Navigate to Manage -> Local Queue Manager -> QM1 -> DEV.QUEUE.1
 
 By default test runs for 1 min
 ```
-./gradlew gatlingRun # To use default configuration (Only for testing purpose)
+./gradle clean gatlingRun # To use default configuration (Only for testing purpose)
 ./gradle clean gatlingRun -Drunid=A1111 -Dresource=<USER_HOME>/project/resource # To use the resource folder created under project directory
 ```
 
 To run test for 1 hour
 ```
-./gradlew gatlingRun -DmaxDuration=60 -Drunid=A1111 -Dresource=<USER_HOME>/project/resource
+./gradle gatlingRun -DmaxDuration=60 -Drunid=A1111 -Dresource=<USER_HOME>/project/resource
 ```
 
 ## Run Consumer
@@ -76,7 +76,7 @@ You need to run consumer to use default configuration in this project.
 To run Consumer
 
 ```
-./gradlew run # To use default configuration (Only for testing purpose)
+./gradle run # To use default configuration (Only for testing purpose)
 gradle run -Dresource=<USER_HOME>/project/resource # To use the resource folder created under project directory
 ```
 
