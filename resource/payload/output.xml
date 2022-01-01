@@ -1,5 +1,5 @@
 <employees>
-    <employee id="111">
+    <employee id="${VAR1}">
         <firstName>${VAR1}</firstName>
         <lastName>${VAR2}</lastName>
         <location>${UUID}</location>
