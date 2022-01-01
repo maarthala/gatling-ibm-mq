@@ -87,9 +87,10 @@ gradle run -Dresource=<USER_HOME>/project/resource # To use the resource folder 
 # Using docker-compose Execution
 After configuring the files, run docker-compose as below
 ```
-docker-compose up --build
+docker-compose up --build --abort-on-container-exit
 ```
-After the test is completed, bring the docker-compose using
+To stop test before complete, use 
+
 ```
 docker-compose down
 ```

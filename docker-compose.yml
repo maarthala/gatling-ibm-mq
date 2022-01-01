@@ -1,8 +1,8 @@
 version: "3.9"
 services:
-  ibmmq-ui:
+  ibmmqui:
     image: ibmcom/mq:latest
-    container_name: ibmmq-ui
+    container_name: ibmmqui
     environment:
       - LICENSE=accept
       - MQ_QMGR_NAME=QM1
@@ -13,31 +13,31 @@ services:
     networks:
       - mqtest
     healthcheck:
-      test: ["CMD", "curl", "-f",  "-k" , "https://ibmmq-ui:9443/ibmmq/console/login.html"]
+      test: ["CMD", "curl", "-f",  "-k" , "https://ibmmqui:9443/ibmmq/console/login.html"]
       interval: 30s
       timeout: 10s
       retries: 5
-  producer:
+  consumer:
     build:
       dockerfile: Dockerfile.producer
       context: .
     # container_name: producer
-    command: gradle run
+    command: gradle run -Dresource=/app/resource
     networks:
       - mqtest
     depends_on:
-      ibmmq-ui:
+      ibmmqui:
         condition: service_healthy
   gatling:
     build:
       dockerfile: Dockerfile.producer
       context: .
     container_name: gatling
-    command: gradle build gatlingRun
+    command: gradle build gatlingRun -Dresource=/app/resource
     networks:
       - mqtest
     depends_on:
-      ibmmq-ui:
+      ibmmqui:
         condition: service_healthy
     volumes:
       - ./build:/app/build

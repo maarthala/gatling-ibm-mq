@@ -18,9 +18,8 @@ import mq.*;
 import jms.*;
 import config.Config;
 
-import java.util.Properties;
-
-import org.apache.commons.cli.*;
+// import java.util.Properties;
+// import org.apache.commons.cli.*;
 
 
 public class App {
@@ -35,7 +34,7 @@ public class App {
 
         Config.Config();
 
-        logger.info("Put application is starting : " + x);
+        logger.info("application is starting : " + System.getProperty("resource"));
 
         JMSContext context;
         Destination destination;

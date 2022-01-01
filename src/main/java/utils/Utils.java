@@ -38,14 +38,13 @@ public  class Utils {
 
 
     public static String getFileFromResources(String fileName) throws Exception {
-
-        fileName = fileName.startsWith("/") ? fileName.substring(1) : fileName;
-        String resourcePath = System.getProperty("resources");
         
+        fileName = fileName.startsWith("/") ? fileName.substring(1) : fileName;
+        String resourcePath = System.getProperty("resource");
         ClassLoader classLoader = Utils.class.getClassLoader();
         InputStream stream = classLoader.getResourceAsStream(fileName);
         
-        if (resourcePath != null) {
+        if (resourcePath != null && resourcePath.trim().length() > 0) {
             fileName = resourcePath + "/" + fileName;
             
             File initialFile = new File(fileName);
@@ -60,7 +59,6 @@ public  class Utils {
     }
 
     public static Document loadXMLFrom(String xml) throws TransformerException {
-        System.out.println(xml);
         Source source = new StreamSource(new StringReader(xml));
         DOMResult result = new DOMResult();
         TransformerFactory.newInstance().newTransformer().transform(source , result);
@@ -92,7 +90,6 @@ public  class Utils {
     // extract values from XML based on properties file map
     public static Map<String,String> getXMLParams(Document document , Map<String, String> paramList) throws Exception  {
         Map<String, String> mapr = new HashMap<String, String>();
-        System.out.println(paramList);
         for (String name : paramList.keySet())
         {
             String xpath = paramList.get(name);

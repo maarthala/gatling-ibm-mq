@@ -19,6 +19,7 @@ class BasicSimulation extends Simulation with SimulationTraits {
         var scnList= new Array[PopulationBuilder](input.size)
         var i = 0
         for ((k,v) <- input) {
+            println("-------> Configuring for MQ : " + k)
             var conf = if (v.host.isEmpty) getJndiConf(v) else getJmsConf(v)
             var scen = mqscn(k, v).mq.inject (rampUsers(v.users) during (RAMP_UP_SEC)) .protocols(conf)
             scnList(i) = scen

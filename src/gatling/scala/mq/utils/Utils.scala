@@ -15,7 +15,6 @@ import scala.io.Codec
 import mq.config.Model._
 import mq.utils.Parser
 
-//import ma.scenarios._
 
 object Utils  extends  SimulationTraits {
 

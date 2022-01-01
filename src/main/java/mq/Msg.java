@@ -32,7 +32,7 @@ public class Msg  {
                 logger.info("JMSCorrelationID: " + correlationID);
 
                 String replyMsgBody = replayMessageBody(receivedMessage.getBody(String.class));
-                System.out.println(replyMsgBody);
+                logger.fine(replyMsgBody);
                 TextMessage message = context.createTextMessage(replyMsgBody);
 
                 message.setJMSCorrelationID(correlationID);

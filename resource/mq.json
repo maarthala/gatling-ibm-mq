@@ -1,12 +1,12 @@
 {
     "mq1": {
-        "host" : "localhost",
+        "host" : "ibmmqui",
         "port" : 1414,
         "queueManager" : "QM1",
         "channel" : "DEV.APP.SVRCONN",
         "queueName" : "DEV.QUEUE.1",
         "replyQueue" : "",
-        "replyValidator" : "",
+        "replyValidator" : "employee",
         "authUser" : "app",
         "authPassword" : "app", 
         "bindingPath" : "",

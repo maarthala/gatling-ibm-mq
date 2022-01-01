@@ -20,7 +20,9 @@ public class Logging {
         logger.addHandler(consoleHandler);
 
         logger.setLevel(LOGLEVEL);
-        logger.finest("Logging initialised");
+        logger.finest("Finest Logging initialised");
+        logger.fine("Fine Logging initialised");
+        
     }
 
 }
