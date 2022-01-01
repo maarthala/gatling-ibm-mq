@@ -41,7 +41,7 @@ Note:  Can configure **n** number of producers and consumers
 
 # Manual Execution
 
-If you do not have IBM MQ details already, Follow below steps to create IBM MQ locally and use predefined configuration in resource folder. If you have IBM MQ details already , jump to How to Run section after resource folder is configured.
+If you do not have IBM MQ details already, Follow below steps to create IBM MQ locally and use predefined configuration in [resource](./resource) folder. If you have IBM MQ details already , read Run Producer(Gatling) section  after resource folder is configured.
 
 ## Run IBM MQ in dockers
 
@@ -79,6 +79,9 @@ To run Consumer
 ./gradlew run # To use default configuration (Only for testing purpose)
 gradle run -Dresource=<USER_HOME>/project/resource # To use the resource folder created under project directory
 ```
+
+## Demo
+![alt text](./gatling-mq.gif)
 
  
 # Using docker-compose Execution
