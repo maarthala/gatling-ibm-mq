@@ -291,6 +291,39 @@ For **Consumer** templating, use ${} format. Example ${UUID}
 </note>
 ```
 
+## Correlation on incoming message in consumer
+
+### XPATH correlation
+
+[xpath.props](./resource/xpath.props) provides correlation on incoming messages. Define xpath correlations and assing to the variable
+```
+VAR1=/note/id/text()
+VAR2=/note/from/text()
+```
+VAR1 and VAR2 hold the values of incoming message.  Use the VAR1 and VAR2 placeholders in [output.xml](./resource/payload/output.xml)
+
+```
+<employees>
+    <employee id="${VAR1}">
+        <firstName>${VAR1}</firstName>
+        <lastName>${VAR2}</lastName>
+        <location>${UUID}</location>
+    </employee>
+</employees>
+```
+
+Final message send to replyQueue 
+
+```
+<employees>
+    <employee id="9802139069434EE2B1B36266FD1BCF59">
+        <firstName>9802139069434EE2B1B36266FD1BCF59</firstName>
+        <lastName>from-eredceww@example.com</lastName>
+        <location>E802139069434EE2B1B36266FD1BCF99</location>
+    </employee>
+</employees>
+```
+
 # References
 
 https://javadoc.io/doc/io.gatling/gatling-jms/latest/io/gatling/jms/action/index.html
