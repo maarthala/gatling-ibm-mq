@@ -7,23 +7,18 @@ This project was build using **gradle**. You might need to install gradle and ja
 
 # Features
 
-> Allows to configure multi queue
-> Consumer
-> Supports replyTo
-> Templating messages
-> Dynamic scenario configuration using configuration file
-> Helps shift-left methods to quickly run messages to IBM MQ
+- Allows to configure multi queue
+- Consumer
+- Supports replyTo
+- Templating messages
+- Dynamic scenario configuration using configuration file
+- Helps shift-left methods to quickly run messages to IBM MQ
 
 # Supported Scenario
 
-```mermaid
-graph LR
-P1[Producer1] -- Send and Wait --> B((IBM MQ))
-P2[Producer2] -- Send Only --> B((IBM MQ))
-B -- Read --> C{Consumer}
-C -- Reply --> B
-B -- Reply --> P1
-```
+![alt text](./gatling-ibm-mq.png)
+
+
 Note:  Can configure **n** number of producers and consumers
  
 # How to Run
