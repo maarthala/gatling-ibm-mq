@@ -11,6 +11,7 @@ This project was build using **gradle**. You might need to install gradle and ja
 - Consumer
 - Supports replyTo
 - Templating messages
+- feed data from input file
 - Dynamic scenario configuration using configuration file
 - Helps shift-left methods to quickly run messages to IBM MQ
 
@@ -126,6 +127,7 @@ For direct connection , we need following details from MQ
 		"authUser" : "app",
 		"authPassword" : "app",
 		"bindingPath" : "",
+		"feeder" : "./users.csv",
 		"payload" : "./payload/input.xml",
 		"users" : 1,
 		"thinktime" : 2
@@ -278,6 +280,46 @@ Final message send to the Queue
 	<phone>20922322</phone>
 </note>
 ```
+
+
+### Data from freeder
+
+We can populate data to payload using  external files. Define the file from which you want to randomly pick the data.
+
+```
+{
+	"mq1": {
+		.
+		.
+		.
+		"feeder": "./users.csv",
+		"users" : 1,
+		"thinktime" : 2
+	}
+}
+
+users.csv
+----------
+_USERNAME_,_PASSWORD_
+test1,test1
+test2,test2
+
+Templating:
+-----------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+	<id>_UUID_</id>
+	<username>_USERNAME_</usernmae>  // A random value from  feeder file
+	<to>to-_RAND_STR8_@example.com</to>
+	<from>from-_RAND_STR8_@example.com</from>
+	<heading>Reminder</heading>
+	<phone>_RAND_INT8_</phone>
+</note>
+
+```
+
+
 
 For **Consumer** templating, use ${} format. Example ${UUID}
 
