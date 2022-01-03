@@ -15,10 +15,9 @@ import scala.io.Source
 class BasicSimulation extends Simulation with SimulationTraits {
 
     def scnList() = {
-        var input = Utils.readScnConfig();
-        var scnList= new Array[PopulationBuilder](input.size)
+        var scnList= new Array[PopulationBuilder](SCN.size)
         var i = 0
-        for ((k,v) <- input) {
+        for ((k,v) <- SCN) {
             println("-------> Configuring for MQ : " + k)
             var conf = if (v.host.isEmpty) getJndiConf(v) else getJmsConf(v)
             var scen = mqscn(k, v).mq.inject (rampUsers(v.users) during (RAMP_UP_SEC)) .protocols(conf)

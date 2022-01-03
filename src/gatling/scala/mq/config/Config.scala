@@ -1,6 +1,7 @@
 package mq.config
 
 import com.typesafe.scalalogging.StrictLogging
+import mq.utils._;
 
 object Config extends StrictLogging {
 
@@ -15,6 +16,8 @@ object Config extends StrictLogging {
     val RUNID = System.getProperty("runid" ,rundiLocal)
 
     val TESTDATA_FOLDER  = System.getProperty("resource" , "")
+
+    val SCN = Utils.readScnConfig();
 
     println( "***********  TEST DETAILS **********" )
     println("Runid :" + RUNID)

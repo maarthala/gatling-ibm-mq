@@ -10,17 +10,24 @@ import javax.jms._
 
 
 case class mqscn(name: String, mqmodel: MQ) extends BaseScenario {
+    
+    var records = Seq[Map[String,Any]]()
+    if (mqmodel.feeder.trim.length != 0) {
+        var filePath = Utils.getPath(mqmodel.feeder)
+        records = csv(filePath).readRecords
+
+    }
 
     def scenariobase = exec(
         exec {
             session =>
             var bodystr = Utils.readFileFromResource(mqmodel.payload)
-            bodystr =  Utils.setParams(bodystr)
+            bodystr =  Utils.setParams(bodystr, records)
             var replyQflag = "1"
             if ( mqmodel.replyQueue.length() == 0 ) {
                 replyQflag = "0"
             }
-            session.set("bodystr", s"${bodystr}").set("replyQflag" , s"${replyQflag}")
+            session.set("bodystr", bodystr).set("replyQflag" , replyQflag)
         }.doIfEqualsOrElse( "#{replyQflag}", "0")  { 
         exec(
            jms(name).send

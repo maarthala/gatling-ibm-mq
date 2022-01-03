@@ -3,6 +3,6 @@
     <id>_UUID_</id>
     <to>Tove-_RAND_STR8_</to>
     <from>Jani-_RAND_STR8_</from>
-    <heading>Reminder</heading>
+    <heading>_USERNAME_</heading>
     <phone>_RAND_INT8_</phone>
 </note>

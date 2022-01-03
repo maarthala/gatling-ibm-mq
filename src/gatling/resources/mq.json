@@ -11,6 +11,7 @@
         "authPassword" : "app", 
         "bindingPath" : "",
         "payload" : "./payload/input.xml",
+        "feeder" : "",
         "users" : 1,
         "thinktime" : 2
     }

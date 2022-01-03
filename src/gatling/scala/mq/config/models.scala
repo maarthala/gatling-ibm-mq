@@ -15,6 +15,7 @@ object Model extends StrictLogging {
     authPassword: String,
     bindingPath: String,
     payload: String,
+    feeder: String,
     users: Int,
     thinktime: Int)
 }

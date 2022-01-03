@@ -1,7 +1,0 @@
-<employees>
-    <employee id="111">
-        <firstName>${VAR1}</firstName>
-        <lastName>${VAR2}</lastName>
-        <location>${UUID}</location>
-    </employee>
-</employees>

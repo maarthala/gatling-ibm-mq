@@ -10,6 +10,7 @@
         "authUser" : "app",
         "authPassword" : "app", 
         "bindingPath" : "",
+        "feeder": "./users.csv",
         "payload" : "./payload/input.xml",
         "users" : 1,
         "thinktime" : 2

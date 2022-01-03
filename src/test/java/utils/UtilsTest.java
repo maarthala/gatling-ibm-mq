@@ -10,12 +10,12 @@ import java.util.Map;
 
 public class UtilsTest {
 
-    @Test 
-    void readFile() throws Exception  {
-            String fileContent = Utils.getFileFromResources("payload/test.json");
-            JSONObject jsonObject = new JSONObject(fileContent);
-            Assertions.assertEquals(jsonObject.getString("name"),"hello");
-    }
+    // @Test 
+    // void readFile() throws Exception  {
+    //         String fileContent = Utils.getFileFromResources("payload/test.json");
+    //         JSONObject jsonObject = new JSONObject(fileContent);
+    //         Assertions.assertEquals(jsonObject.getString("name"),"hello");
+    // }
 
 
     @Test 
@@ -27,7 +27,7 @@ public class UtilsTest {
             Map<String,String> params = Utils.getXMLParams(document, map);
             System.out.println(params);
             String value = params.get("VAR1");
-            Assertions.assertEquals(value,"33333");
+            Assertions.assertEquals(value,"_UUID_");
     }
 
     @Test 
@@ -69,11 +69,11 @@ public class UtilsTest {
             mapGeneric.forEach((k, v) -> ouputParams.merge(k, v, (oldValue, newValue) -> oldValue));
   
             String name = ouputParams.get("VAR1");
-            Assertions.assertEquals(name,"33333");
+            Assertions.assertEquals(name,"_UUID_");
    
             String content = Utils.parsePayload(outputContent, ouputParams);
             System.out.println("Output->" + content);
-            Assertions.assertTrue(content.contains("33333"));
+            Assertions.assertTrue(content.contains("_UUID_"));
 
     }
 
