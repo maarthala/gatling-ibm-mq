@@ -292,7 +292,7 @@ We can populate data to payload using  external files. Define the file from whic
 		.
 		.
 		.
-		"feeder": "./users.csv",
+		"feeder": "./users.csv", // Feeder file in resource folder which holds username and passwords.
 		"users" : 1,
 		"thinktime" : 2
 	}
